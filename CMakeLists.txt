@@ -101,6 +101,8 @@ option(BACKLIGHT_CONTROL "If true, enables fbcp-ili9341 to take control of backl
 if (BACKLIGHT_CONTROL)
 	message(STATUS "Enabling fbcp-ili9341 backlight control")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DBACKLIGHT_CONTROL")
+else()
+    message(STATUS "Disabling fbcp-ili9341 backlight control")
 endif()
 
 option(DISPLAY_CROPPED_INSTEAD_OF_SCALING "If ON, displays the cropped center part of the source image on the SPI display. If OFF, scales the source image to the SPI display" OFF)
