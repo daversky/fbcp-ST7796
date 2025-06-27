@@ -27,7 +27,7 @@ CS_PIN="11"
 BL_PIN="18"
 
 #export CXX=g++-12
-
+rm -rf build
 mkdir -p build
 cd build
 rm -rf *
@@ -42,11 +42,14 @@ cmake \
 -DGPIO_TFT_RESET_PIN=${RST_PIN} \
 -DGPIO_TFT_BACKLIGHT=${BL_PIN} \
 -DSPI_BUS_CLOCK_DIVISOR=60 \
--DBACKLIGHT_CONTROL=OFF \
+-DBACKLIGHT_CONTROL=ON \
 -DDISPLAY_SWAP_BGR=ON \
 -DSTATISTICS=0 \
 -DDISPLAY_ROTATE_180_DEGREES=ON \
 ..
 
 make -j
-#sudo ./fbcp-ili9341
+
+sudo systemctl stop fbcp
+sudo cp -v ./fbcp-ili9341 /usr/local/bin/fbcp
+sudo systemctl start fbcp
